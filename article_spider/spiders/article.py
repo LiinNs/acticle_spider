@@ -18,14 +18,14 @@ class ArticleSpider(CrawlSpider):
         if rule.next_page:
             rule_list.append(Rule(LinkExtractor(restrict_xpaths=rule.next_page)))
         # 添加抽取文章链接的规则
-        # rule_list.append(Rule(LinkExtractor(
-        #     allow=[rule.allow_url],
-        #     restrict_xpaths=[rule.extract_from]),
-        #     callback='parse'))
+        rule_list.append(Rule(LinkExtractor(
+            allow=rule.allow_url,
+            restrict_xpaths=rule.extract_from),
+            callback='parse_item'))
         self.rules = tuple(rule_list)
         super(ArticleSpider, self).__init__()
 
-    def parse(self, response):
+    def parse_item(self, response):
         article = Article()
 
         title = response.xpath(self.rule.title_xpath).extract()

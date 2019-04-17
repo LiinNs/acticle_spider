@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 def parse_text(extract_texts, rule_name, attr_name):
     """xpath的提取方式
     @param extract_texts: 被处理的文本数组
